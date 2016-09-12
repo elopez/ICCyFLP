@@ -148,7 +148,8 @@
 \pagebreak
 
 \begin{homeworkProblem}[6]
-    Usando notación Dirac y resultados de ejercicios anteriores, calcular rápidamente
+    Usando notación Dirac y resultados de ejercicios anteriores,
+    calcular rápidamente
 
     $$
     \left(\left(\begin{matrix}1 \\ 2\end{matrix} \right) \otimes
@@ -159,8 +160,34 @@
 
     \solution
 
-    We solve each solution algebraically to determine a possible constant
-    \(c\).
+    Primero convertimos la operación a notación bra-ket sobre la base
+    ortonormal $\{\ket{0}, \ket{1}\}$, quedando
+    \[
+    \bigl(\left(\ket{0} + 2\ket{1}\right) \otimes
+          \left(3\bra{0} + 4\bra{1}\right)
+    \bigr) \,
+    (2\ket{0} + 3\ket{1})
+    \]
+
+    Posteriormente aplicamos el producto tensorial, obteniendo
+    \[
+    \left(3\ketbra{0}{0} + 4\ketbra{0}{1} + 6\ketbra{1}{0} +
+          8\ketbra{1}{1}
+    \right) \,
+    (2\ket{0} + 3\ket{1})
+    \]
+
+    Luego realizamos el producto restante
+    \[\begin{split}
+    6\ket{0}\braket{0}{0}  &+ \;\:9\ket{0}\braket{0}{1} +
+    \;\:8\ket{0}\braket{1}{0}   + 12\ket{0}\braket{1}{1} + \\
+    12\ket{1}\braket{0}{0} &+ 18\ket{1}\braket{0}{1} +
+    16\ket{1}\braket{1}{0}  + 24\ket{1}\braket{1}{1}
+    \end{split}\]
+
+    Finalmente, y dado que $\braket{0} = \braket{1} = 1$ y
+    $\braket{0}{1} = \braket{1}{0} = 0$ por ser la base ortonormal,
+    podemos simplificar dicha expresión a $18\ket{0} + 36\ket{1}$
 
 \end{homeworkProblem}
 
