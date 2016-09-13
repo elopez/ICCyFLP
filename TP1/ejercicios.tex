@@ -150,17 +150,17 @@
 \begin{homeworkProblem}[6]
     Usando notación Dirac y resultados de ejercicios anteriores,
     calcular rápidamente
-    $$
+    \[
     \left(\left(\begin{matrix}1 \\ 2\end{matrix} \right) \otimes
-            \left(\begin{matrix}3 & 4\end{matrix} \right){}
+            \left(\begin{matrix}3 & 4\end{matrix} \right)
     \right)
-    \left(\begin{matrix}2 \\ 3\end{matrix} \right){}
-    $$
+    \left(\begin{matrix}2 \\ 3\end{matrix} \right)
+    \]
 
     \solution
 
-    Primero convertimos la operación a notación bra-ket sobre la base
-    ortonormal $\{\ket{0}, \ket{1}\}$, quedando
+    Al reescribir la operación en notación bra-ket sobre la base
+    ortonormal $\{\ket{0}, \ket{1}\}$, queda
     \[
     \bigl(\left(\ket{0} + 2\ket{1}\right) \otimes
           \left(3\bra{0} + 4\bra{1}\right)
@@ -168,7 +168,7 @@
     (2\ket{0} + 3\ket{1})
     \]
 
-    Posteriormente aplicamos el producto tensorial, obteniendo
+    Posteriormente es posible aplicar el producto tensorial, obteniendo
     \[
     \left(3\ketbra{0}{0} + 4\ketbra{0}{1} + 6\ketbra{1}{0} +
           8\ketbra{1}{1}
@@ -176,7 +176,7 @@
     (2\ket{0} + 3\ket{1})
     \]
 
-    Luego realizamos el producto restante
+    Luego se evalúa el producto vectorial restante
     \[\begin{split}
     6\ket{0}\braket{0}{0}  &+ \;\:9\ket{0}\braket{0}{1} +
     \;\:8\ket{0}\braket{1}{0}   + 12\ket{0}\braket{1}{1} + \\
@@ -185,8 +185,8 @@
     \end{split}\]
 
     Finalmente, y dado que $\braket{0} = \braket{1} = 1$ y
-    $\braket{0}{1} = \braket{1}{0} = 0$ por ser la base ortonormal,
-    podemos simplificar dicha expresión a $18\ket{0} + 36\ket{1}$
+    $\braket{0}{1} = \braket{1}{0} = 0$ por ortonormalidad de la base,
+    dicha expresión resulta simplificable a $18\ket{0} + 36\ket{1}$
 
 \end{homeworkProblem}
 
@@ -229,16 +229,17 @@ En una lista de un millón de elementos distintos
 \end{homeworkProblem}
 
 \begin{homeworkProblem}[26]
-    En el protocolo BB84, ¿cuántos bits necesitan comparar Alice y Bob para tener $90\%$ de chances de detectar la presencia de Eve?
+    En el protocolo BB84, ¿cuántos bits necesitan comparar Alice y Bob
+    para tener $90\%$ de chances de detectar la presencia de Eve?
 
     \solution
 
-    Para este análisis ignoraremos los qubits en donde Alice y
+    Para este análisis se ignoran los qubits en donde Alice y
     Bob no hayan usado el mismo esquema, ya que el algoritmo los descarta.
     Por cada qubit, Eve debe elegir un esquema entre $+$ o $\times$
     para observarlo y retransmitirlo. Si lo hace aleatoriamente, tendrá
-    probabilidad $\nicefrac{1}{2}$ de usar el mismo que Alice y Bob
-    y no modificar el qubit en tránsito. En caso contrario, el qubit
+    probabilidad $\nicefrac{1}{2}$ de usar el mismo esquema que Alice y
+    Bob y no modificar el qubit en tránsito. En caso contrario, el qubit
     colapsará a otro estado al realizar la medición, y será luego medido
     erróneamente por Bob un $50\%$ de las veces. Por lo tanto, la
     probabilidad de no detectar a Eve comparando un qubit de Alice y Bob
@@ -246,9 +247,11 @@ En una lista de un millón de elementos distintos
 
     Dado que esta probabilidad por qubit es independiente, resulta que
     con comparar 8 qubits se tiene aproximadamente un $10\%$ de
-    probabilidad de no detectar a Eve $\left(\left(\nicefrac{3}{4}\right)^8 \approx 0,10\right)$,
+    probabilidad de no detectar a Eve
+    $\left(\left(\nicefrac{3}{4}\right)^8 \approx 0,10\right)$;
     en otras palabras, el $90\%$ de las veces Alice y Bob podrán inferir
-    la presencia de Eve y accionar de forma pertinente.
+    la presencia de Eve y accionar de forma pertinente si comparan 8
+    qubits.
 \end{homeworkProblem}
 
 \end{document}
