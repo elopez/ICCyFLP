@@ -192,19 +192,101 @@
 
 \begin{homeworkProblem}[8]
     Probar las propiedades de los operadores adjuntos listadas justo debajo de la Definición 1.14
+
+    \solution
+    \begin{proof}[Prueba de $(A^{\dag})^{\dag} = A$]
+    Sea $A \in \mathcal{M}_{n x m}$ con componentes $a_{ij}$. Luego, por
+    definición de adjunto, $A^{\dag} \in \mathcal{M}_{m x n}$ tendrá
+    componentes $a^{*}_{ji}$. Análogamente, las componentes de
+    $(A^{\dag})^{\dag} \in \mathcal{M}_{n x m}$ serán
+    $(a^{*}_{ij})^{*} = (a_{ij})$. Finalmente, por igualdad de matrices
+    se puede afirmar que $(A^{\dag})^{\dag} = A$.
+    \end{proof}
+
+    \begin{proof}[Prueba de $(A + B)^{\dag} = A^{\dag} + B^{\dag}$]
+    Sean $A, B \in \mathcal{M}_{n x m}$ con componentes $a_{ij}$ y
+    $b_{ij}$ respectivamente. Por definición de adjunto,
+    $A^{\dag}, B^{\dag} \in \mathcal{M}_{m x n}$ tienen componentes
+    $a_{ji}^{*}$ y $b_{ji}^{*}$. A su vez, la suma de matrices $A + B$
+    tendrá componentes $a_{ij} + b_{ij}$ y $(A + B)^{\dag}$ estará
+    compuesta por $(a_{ji} + b_{ji})^{*}$. Aplicando propiedades del
+    conjugado, resulta que $(a_{ji} + b_{ji})^{*} = a_{ji}^{*} + b_{ji}^{*}$,
+    lo que equivale a la suma de componentes de $A^{\dag}$ y $B^{\dag}$.
+    Por igualdad y suma de matrices luego vale que
+    $(A + B)^{\dag} = A^{\dag} + B^{\dag}$.
+    \end{proof}
+
+    \begin{proof}[Prueba de $(\alpha A)^{\dag} = \alpha^{*} A^{\dag}$]
+    Sea $A \in \mathcal{M}_{n x m}$, con componentes $\alpha\, a_{ij}$.
+    Por definición de adjunto, $A^{\dag}$ está compuesta por
+    $a_{ji}^{*}$. Por otro lado, $(\alpha A)^{\dag}$ tiene componentes
+    $(\alpha\, a_{ji})^{*}$ y por propiedad del conjugado resulta
+    $(\alpha\, a_{ji})^{*} = \alpha^{*} a_{ji}^{*}$. De esto se concluye
+    por igualdad de matrices que $(\alpha A)^{\dag} = \alpha^{*} A^{\dag}$.
+    \end{proof}
+
+    \begin{proof}[Prueba de $(AB)^{\dag} = B^{\dag} A^{\dag}$]
+    Sean $A, B \in \mathcal{M}_{n x m}$. Por definición de adjunto y
+    propiedades del conjugado, $(AB)^{\dag} = (A^{*} B^{*})^{T}$. Luego,
+    dada la propiedad de matrices $(AB)^{T} = B^{T} A^{T}$ y por
+    definición de adjunto resulta que
+    $(A^{*} B^{*})^{T} = (B^{*})^{T} (A^{*})^{T} = B^{\dag} A^{\dag}$.
+    \end{proof}
+
+    \begin{proof}[Prueba de $\bra{A\psi} = \bra{\psi} A^{\dag}$]
+    TODO
+    \end{proof}
 \end{homeworkProblem}
 
 \begin{homeworkProblem}[10]
-Considerar el operador de medición $\{\dyad{+}, \dyad{-}\}$, con
-$\ket{+} = \nicefrac{1}{\sqrt{2}}\ket{0} + \nicefrac{1}{\sqrt{2}}\ket{1}$
-y $\ket{-} = \nicefrac{1}{\sqrt{2}}\ket{0} - \nicefrac{1}{\sqrt{2}}\ket{1}$.
-Determinar los resultados posibles (y sus probabilidades) de medir con
-ese operador cada uno de los siguientes qubits:
-\begin{enumerate}[label=(\alph*)]
-    \item $\nicefrac{1}{3}\ket{0} + \nicefrac{\sqrt{8}}{3}\ket{1}$.
-    \item $\nicefrac{1}{\sqrt{2}}\, (\ket{0} + \ket{1})$.
-    \item $\ket{-}$
-\end{enumerate}
+    Considerar el operador de medición $\{\dyad{+}, \dyad{-}\}$, con
+    $\ket{+} = \nicefrac{1}{\sqrt{2}}\ket{0} + \nicefrac{1}{\sqrt{2}}\ket{1}$
+    y $\ket{-} = \nicefrac{1}{\sqrt{2}}\ket{0} - \nicefrac{1}{\sqrt{2}}\ket{1}$.
+    Determinar los resultados posibles (y sus probabilidades) de medir con
+    ese operador cada uno de los siguientes qubits:
+    \begin{enumerate}[label=(\alph*)]
+        \item $\nicefrac{1}{3}\ket{0} + \nicefrac{\sqrt{8}}{3}\ket{1}$.
+        \item $\nicefrac{1}{\sqrt{2}}\, (\ket{0} + \ket{1})$.
+        \item $\ket{-}$
+    \end{enumerate}
+
+    \solution
+
+    Para resolver este ejercicio se puede aplicar un resultado equivalente
+    al obtenido en el \emph{ejemplo 1.14} del apunte, pero en esta
+    ocasión con qubits sobre la base $\{\ket{+}, \ket{-}\}$. Dado un qubit
+    $\alpha\ket{+} + \beta\ket{-}$ y el operador provisto, se tiene una
+    probabilidad de $|\alpha|^2$ de aplicar el proyector $\dyad{+}$ y
+    evolucionar el sistema a $\frac{\alpha}{|\alpha|}\ket{+}$, y una
+    probabilidad $|\beta|^2$ de aplicar el proyector $\dyad{-}$ y evolucionar
+    a $\frac{\beta}{|\beta|}\ket{-}$.
+
+    Para convertir de $\{\ket{0}, \ket{1}\}$ a $\{\ket{+}, \ket{-}\}$
+    resulta útil tener la equivalencia inversa. Esta se puede obtener
+    operando con las definiciones, y resulta ser
+    $\ket{0} = \nicefrac{1}{\sqrt{2}}\ket{+} + \nicefrac{1}{\sqrt{2}}\ket{-}$
+    y $\ket{1} = \nicefrac{1}{\sqrt{2}}\ket{+} - \nicefrac{1}{\sqrt{2}}\ket{-}$.
+
+    \begin{enumerate}[label=(\alph*)]
+        \item Reemplazando $\ket{+}$ y $\ket{-}$ se tiene
+        \[\begin{aligned}
+        \frac{1}{3}\ket{0} + \frac{\sqrt{8}}{3}\ket{1} &=
+        \frac{1}{3}\left(\frac{1}{\sqrt{2}}\ket{+} + \frac{1}{\sqrt{2}}\ket{-}\right) + \frac{\sqrt{8}}{3}\left(\frac{1}{\sqrt{2}}\ket{+} - \frac{1}{\sqrt{2}}\ket{-}\right) \\
+        &= \frac{1 + \sqrt{8}}{3\sqrt{2}}\ket{+} + \frac{1 - \sqrt{8}}{3\sqrt{2}}\ket{-} \\
+        \end{aligned}\]
+
+        Luego la probabilidad de medir $\ket{+}$ es de
+        $\left(\frac{1 + \sqrt{8}}{3\sqrt{2}}\right)^{2} = \frac{9 + 2\sqrt{8}}{18}$
+        y la probabilidad de medir $\ket{-}$ es de
+        $\left(\frac{1 - \sqrt{8}}{3\sqrt{2}}\right)^{2} = \frac{9 - 2\sqrt{8}}{18}$.
+
+        \item $\nicefrac{1}{\sqrt{2}}\, (\ket{0} + \ket{1}) = \nicefrac{1}{\sqrt{2}} \ket{0} + \nicefrac{1}{\sqrt{2}} \ket{1} = \ket{+}$.
+        Luego se medirá $\ket{+}$ con probabilidad 1.
+
+        \item Al aplicar el operador de medición sobre $\ket{-}$ se obtendrá
+        $\ket{-}$ con probabilidad 1.
+    \end{enumerate}
+
 \end{homeworkProblem}
 
 \begin{homeworkProblem}[13]
