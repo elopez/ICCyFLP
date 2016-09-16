@@ -15,6 +15,10 @@
 \usepackage{physics}
 \usepackage{units}
 
+\usepackage{mathtools}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
 \usetikzlibrary{automata,positioning}
 
 %
@@ -324,15 +328,37 @@ Escribir la traza del algoritmo de Deutsch para la función identidad.
 \end{homeworkProblem}
 
 \begin{homeworkProblem}[25]
-En una lista de un millón de elementos distintos
-\begin{enumerate}[label=(\alph*)]
-    \item ¿Cuál es el número óptimo de iteraciones del algoritmo de
-    Grover para buscar un elemento?
-    \item ¿Cuál es la probabilidad de error con el número óptimo de
-    iteraciones?
-    \item ¿Cuántos pasos serían necesarios, en promedio, en el caso
-    clásico?
-\end{enumerate}
+    En una lista de un millón de elementos distintos
+    \begin{enumerate}[label=(\alph*)]
+        \item ¿Cuál es el número óptimo de iteraciones del algoritmo de
+        Grover para buscar un elemento?
+        \item ¿Cuál es la probabilidad de error con el número óptimo de
+        iteraciones?
+        \item ¿Cuántos pasos serían necesarios, en promedio, en el caso
+        clásico?
+    \end{enumerate}
+
+    \solution
+
+    Debido a que el algoritmo de Grover funciona sobre cantidades
+    $N = 2^{n}$, primero se deberá completar el arreglo con nuevos
+    elementos, por lo que para el análisis de este ejercicio se usa
+    $N = 2^{\ceil*{\log_{2}1000000}} = 2^{20}$.
+
+    \begin{enumerate}[label=(\alph*)]
+        \item El número óptimo de iteraciones para buscar un elemento
+        usando el algoritmo de Grover está dado por la fórmula
+        $k = \floor*{\frac{\pi}{4\arcsin \sqrt{\frac{1}{2^{n}}}}}$. En
+        particular, $k = 804$ para $n = 20$.
+        \item Una cota superior de la probabilidad de error con el
+        número óptimo de iteraciones es $\frac{1}{2^{n}}$. Con $n = 20$
+        esto resulta ser $0.0009765625$.
+        \item Para encontrar un elemento en una lista no ordenada usando
+        un algoritmo clásico, se necesitarán revisar $\frac{N}{2}$
+        elementos en el caso promedio. Al no ser necesario completar el
+        arreglo para tener una cantidad $2^{n}$ de elementos, esto
+        equivale a $500000$ pasos en este caso.
+    \end{enumerate}
 \end{homeworkProblem}
 
 \begin{homeworkProblem}[26]
