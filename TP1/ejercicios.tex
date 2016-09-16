@@ -290,8 +290,33 @@
 \end{homeworkProblem}
 
 \begin{homeworkProblem}[13]
-¿Cuáles de los estados del ejercicio anterior están en superposición con
-respecto a la base $\{\ket{+}, \ket{-} \}$ y cuáles no?
+    ¿Cuáles de los estados del ejercicio anterior\footnote{ejercicio 12 de la práctica}
+    están en superposición con respecto a la base $\{\ket{+}, \ket{-} \}$
+    y cuáles no?
+
+    \solution
+
+    Para responder, se cambiará de base como fue explicado en el ejercicio
+    10. Un qubit se dice en superposición si resulta ser una combinación
+    lineal con coeficientes no nulos de los elementos de la base. En otras
+    palabras, dado un qubit $\alpha\ket{+} + \beta\ket{-}$, está en
+    superposición si y sólo si $|\alpha| \neq 0$ y $|\beta| \neq 0$
+
+    \begin{enumerate}[label=(\alph*)]
+        \item $\ket{0} = \nicefrac{1}{\sqrt{2}}\ket{+} + \nicefrac{1}{\sqrt{2}}\ket{-}$,
+        por lo que está en superposición respecto a la base.
+        \item $\ket{+}$ no está en superposición respecto a la base, ya
+        que es un elemento de la misma.
+        \item $\nicefrac{1}{\sqrt{2}}\left(\ket{+} + \ket{-}\right) = \nicefrac{1}{\sqrt{2}}\ket{+} + \nicefrac{1}{\sqrt{2}}\ket{-}$
+        por lo que se encuentra en superposición respecto a la base.
+        \item $\nicefrac{1}{\sqrt{2}}\left(\ket{+} - \ket{-}\right) = \nicefrac{1}{\sqrt{2}}\ket{+} - \nicefrac{1}{\sqrt{2}}\ket{-}$
+        por lo que se encuentra en superposición respecto a la base.
+        \item $\nicefrac{3}{\sqrt{2}}\ket{+} - \nicefrac{1}{\sqrt{2}}\ket{-}$
+        es combinación lineal con coeficientes no nulos por lo que
+        también encuentra en superposición respecto a la base.
+        \item $\nicefrac{1}{\sqrt{2}}\ket{0} - \nicefrac{1}{\sqrt{2}}\ket{1} = \ket{-}$,
+        elemento de la base, por lo que no se encuentra en superposición respecto a ella.
+    \end{enumerate}
 \end{homeworkProblem}
 
 \begin{homeworkProblem}[23]
