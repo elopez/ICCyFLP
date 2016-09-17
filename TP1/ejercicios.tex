@@ -324,7 +324,24 @@
 \end{homeworkProblem}
 
 \begin{homeworkProblem}[23]
-Escribir la traza del algoritmo de Deutsch para la función identidad.
+    Escribir la traza del algoritmo de Deutsch para la función identidad.
+
+    \solution
+
+    El algoritmo de Deutsch comienza aplicando compuertas Hadamard a
+    $\ket{0}$ y $\ket{1}$:
+    \[\ket{01} \xrightarrow{H(1,2)} \ket{+} \otimes \frac{1}{\sqrt{2}}\left(\ket{0} - \ket{1}\right) = \frac{1}{\sqrt{2}} \left(\ket{+0} - \ket{+1}\right)\]
+    Luego se aplica la compuerta $U_{id}$
+    \[\begin{aligned}
+    U_{id}\left(\frac{1}{\sqrt{2}} \left(\ket{+0} - \ket{+1}\right)\right) &= \frac{1}{\sqrt{2}} \left(U_{id}\ket{+0} - U_{id}\ket{+1}\right) \\
+    &= \frac{1}{\sqrt{2}} \left(\frac{1}{\sqrt{2}} \left(\ket{0, \textrm{id } 0} + \ket{1, \textrm{id } 1}\right)-\frac{1}{\sqrt{2}} \left(\ket{0, 1 \oplus \textrm{id } 0} + \ket{1, 1 \oplus \textrm{id } 1}\right)\right) \\
+    &= \frac{1}{2} \left(\ket{00} + \ket{11} - \ket{01} - \ket{10}\right) \\
+    &= \left(\frac{\ket{0} - \ket{1}}{\sqrt{2}}\right) \otimes \left(\frac{\ket{0} - \ket{1}}{\sqrt{2}}\right) \\
+    &= \ket{--}
+    \end{aligned}\]
+    Finalmente, se aplica Hadamard al primer qubit, resultando $\ket{1}$
+    con probabilidad 1. Esto implica que la función identidad no es
+    constante.
 \end{homeworkProblem}
 
 \begin{homeworkProblem}[25]
