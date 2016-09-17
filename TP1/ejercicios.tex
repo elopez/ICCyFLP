@@ -14,7 +14,7 @@
 \usepackage{enumitem}
 \usepackage{physics}
 \usepackage{units}
-
+\usepackage{comment}
 \usepackage{mathtools}
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
@@ -191,13 +191,13 @@
     Finalmente, y dado que $\braket{0} = \braket{1} = 1$ y
     $\braket{0}{1} = \braket{1}{0} = 0$ por ortonormalidad de la base,
     dicha expresión resulta simplificable a $18\ket{0} + 36\ket{1}$
-
 \end{homeworkProblem}
 
 \begin{homeworkProblem}[8]
     Probar las propiedades de los operadores adjuntos listadas justo debajo de la Definición 1.14
 
     \solution
+
     \begin{proof}[Prueba de $(A^{\dag})^{\dag} = A$]
     Sea $A \in \mathcal{M}_{n x m}$ con componentes $a_{ij}$. Luego, por
     definición de adjunto, $A^{\dag} \in \mathcal{M}_{m x n}$ tendrá
@@ -236,10 +236,11 @@
     definición de adjunto resulta que
     $(A^{*} B^{*})^{T} = (B^{*})^{T} (A^{*})^{T} = B^{\dag} A^{\dag}$.
     \end{proof}
-
+\begin{comment}
     \begin{proof}[Prueba de $\bra{A\psi} = \bra{\psi} A^{\dag}$]
-    TODO
+    Aquí habría una prueba si hubiera podido realizarla :/
     \end{proof}
+\end{comment}
 \end{homeworkProblem}
 
 \begin{homeworkProblem}[10]
@@ -290,7 +291,6 @@
         \item Al aplicar el operador de medición sobre $\ket{-}$ se obtendrá
         $\ket{-}$ con probabilidad 1.
     \end{enumerate}
-
 \end{homeworkProblem}
 
 \begin{homeworkProblem}[13]
