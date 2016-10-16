@@ -1,0 +1,239 @@
+\documentclass{article}
+
+\usepackage[spanish,american]{babel}
+\usepackage{fontspec}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumitem}
+\usepackage{physics}
+\usepackage{units}
+\usepackage{comment}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass: \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{El ejercicio \arabic{#1} continúa en la página siguiente\ldots}\nobreak{}
+    \nobreak\extramarks{Ejercicio \arabic{#1} (cont.)}{El ejercicio \arabic{#1} continúa en la página siguiente\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Ejercicio \arabic{#1} (cont.)}{El ejercicio \arabic{#1} continúa en la página siguiente\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Ejercicio \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Ejercicio \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Ejercicio \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Trabajo Práctico 2}
+\newcommand{\hmwkDueDate}{21 de Octubre de 2016}
+\newcommand{\hmwkClass}{Computación cuántica}
+\newcommand{\hmwkClassLong}{Introducción a la computación cuántica y fundamentos de lenguajes de programación}
+\newcommand{\hmwkClassInstructor}{Profesor Alejandro Díaz-Caro}
+\newcommand{\hmwkAuthorName}{Emilio López}
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass\footnote{Formalmente ``\hmwkClassLong''}:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Fecha\ de\ entrega:\ \hmwkDueDate}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor}}
+    \vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Parte \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\vspace{1em}\textbf{\large Solución}\vspace{.5em}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}[57]
+    Suppose $\{L_{l}\}$ and $\{M_{m}\}$ are two sets of measurement
+    operators. Show that a measurement defined by the measurement
+    operators $\{L_{l}\}$ followed by a measurement defined by the
+    measurement operators $\{M_{m}\}$ is physically equivalent to a
+    single measurement defined by measurement operators $\{N_{lm}\}$
+    with the representation $N_{lm} \equiv M_{m}L_{l}$.
+
+    \solution
+
+    TODO
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[65]
+    Express the states $\nicefrac{1}{\sqrt{2}} \; (\ket{0} + \ket{1})$ and
+    $\nicefrac{1}{\sqrt{2}} \; (\ket{0} - \ket{1})$ in a basis in which they
+    are not the same up to a relative phase shift.
+
+    \solution
+
+    TODO
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[74]
+    Suppose a composite of systems $A$ and $B$ is in the state
+    $\ket{a}\ket{b}$, where $\ket{a}$ is a pure state of system $A$,
+    and $\ket{b}$ is a pure state of system $B$. Show that the reduced
+    density operator of system $A$ alone is a pure state.
+
+    \solution
+
+    TODO
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[75]
+    For each of the four Bell states, find the reduced density operator
+    for each qubit.
+
+    \solution
+
+    TODO
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[12]
+    Probar que para todo operador $A$, $A^{\dagger}A$ es positivo.
+
+    \solution
+
+    TODO
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[14]
+    Sea un sistema cuántico descripto por el conjunto de estados puros
+    $\{(\nicefrac{1}{4}, \ket{0}); (\nicefrac{3}{4}, \ket{+})\}$
+    y otro sistema cuántico descripto por el conjunto
+    $\{(\nicefrac{3}{4}, \ket{1}); (\nicefrac{1}{4}, \ket{-})\}$
+
+    \begin{enumerate}[label=(\alph*)]
+        \item Dar la matriz densidad del sistema completo compuesto por
+        ambos sistemas.
+        \item Utilizando la medición $\{ \dyad{00}, \dyad{11}, \dyad{01}, \dyad{10} \}$,
+        dar los posibles resultados de la medición con sus probabilidades
+        y el estado final del sistema en cada caso.
+    \end{enumerate}
+
+    \solution
+
+    TODO
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[16]
+    Utilizar la traza parcial para determinar cuales de los siguientes
+    estados están enredados.
+
+    \begin{enumerate}[label=(\alph*)]
+        \item $\nicefrac{1}{\sqrt{2}} \; (\ket{0+} + \ket{1-})$
+        \item $\nicefrac{1}{\sqrt{2}} \; (\ket{++} + \ket{--})$
+        \item $\nicefrac{1}{\sqrt{3}} \; (\ket{++} + \ket{+-} + \ket{--})$
+    \end{enumerate}
+
+    \solution
+
+    TODO
+\end{homeworkProblem}
+
+\end{document}
