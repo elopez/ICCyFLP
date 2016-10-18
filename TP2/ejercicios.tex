@@ -7,6 +7,7 @@
 \usepackage{extramarks}
 \usepackage{amsmath}
 \usepackage{amsthm}
+\usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{tikz}
 \usepackage[plain]{algorithm}
@@ -161,7 +162,16 @@
 
     \solution
 
-    TODO
+    Sea $\ket{\phi}$ el estado inicial. Midiendo con $\{L_{l}\}$ y luego con $\{M_{m}\}$ resulta
+    \[\begin{aligned}
+    \ket{\phi} &\xrightarrow{L} \frac{L_l \ket{\phi}}{\sqrt{\expval{L_{l}^{\dagger}L_l}{\phi}}}
+        = r L_{l} \ket{\phi} = r \ket{\psi} \\
+    r\ket{\psi} &\xrightarrow{M} \frac{M_m r \ket{\psi}}{\sqrt{\expval{M_{m}^{\dagger} r^{2} M_m}{\psi}}}
+        = \frac{M_m r \ket{\psi}}{r \sqrt{\expval{M_{m}^{\dagger} M_m}{\psi}}}
+        = \frac{M_m L_l \ket{\phi}}{\sqrt{\expval{L_{l}^{\dagger} M_{m}^{\dagger} M_m L_l}{\phi}}}
+        = \frac{M_m L_l \ket{\phi}}{\sqrt{\expval{{\left(M_{m} L_{l}\right)}^{\dagger} \left(M_m L_l\right)}{\phi}}}
+    \end{aligned}\]
+    Por lo tanto el estado final es equivalente al obtenido al medir con $N_{lm} = M_{m} L_{l}$.
 \end{homeworkProblem}
 
 \begin{homeworkProblem}[65]
@@ -171,7 +181,11 @@
 
     \solution
 
-    TODO
+    Expresados sobre la base $\{ \ket{+}, \ket{-} \}$, dichos estados
+    equivalen a $\ket{+}$ y $\ket{-}$ respectivamente, y es trivial
+    observar que no son el mismo con una diferencia de fase, ya que
+    $\nexists \; \theta : e^{i \theta} = 0$.
+
 \end{homeworkProblem}
 
 \begin{homeworkProblem}[74]
@@ -182,7 +196,9 @@
 
     \solution
 
-    TODO
+    Sea $\rho^{AB} = \dyad{ab}$. Luego $\rho^{A} = \textrm{tr}_{B}\left(\dyad{ab}\right) = \textrm{tr}_{B}\left(\dyad{a} \otimes \dyad{b}\right) = \dyad{a} \textrm{tr}\left(\dyad{b}\right)$.{}
+    Como $\ket{b}$ es un estado puro, resulta $\textrm{tr}\left(\dyad{b}\right) = 1$.
+    Por lo tanto $\rho^{A} = \dyad{a}$ que también es un estado puro.
 \end{homeworkProblem}
 
 \begin{homeworkProblem}[75]
@@ -191,7 +207,43 @@
 
     \solution
 
-    TODO
+    Recordemos los cuatro estados de Bell:
+
+    \[\begin{aligned}
+    \begin{split}
+    \beta_{00} &= \nicefrac{1}{\sqrt{2}} \left( \ket{00} + \ket{11} \right) \\
+    \beta_{01} &= \nicefrac{1}{\sqrt{2}} \left( \ket{01} + \ket{10} \right) \\
+    \end{split}
+    \quad\quad
+    \begin{split}
+    \beta_{10} &= \nicefrac{1}{\sqrt{2}} \left( \ket{00} - \ket{11} \right) \\
+    \beta_{11} &= \nicefrac{1}{\sqrt{2}} \left( \ket{01} - \ket{10} \right) \\
+    \end{split}
+    \end{aligned}\]
+
+    \[\begin{aligned}
+    \begin{split}
+    \rho_{0}^{\beta_{00}} &= \nicefrac{1}{2}\; \textrm{tr}_{0}\left(\dyad{00}{00} + \dyad{00}{11} + \dyad{11}{00} + \dyad{11}{11}\right) \\
+    &= \frac{\dyad{0} + \dyad{1}}{2} = \frac{I}{2} \\
+    \rho_{1}^{\beta_{00}} &= \nicefrac{1}{2}\; \textrm{tr}_{1}\left(\dyad{00}{00} + \dyad{00}{11} + \dyad{11}{00} + \dyad{11}{11}\right) \\
+    &= \frac{\dyad{0} + \dyad{1}}{2} = \frac{I}{2} \\
+    \rho_{0}^{\beta_{01}} &= \nicefrac{1}{2}\; \textrm{tr}_{0}\left(\dyad{01}{01} + \dyad{01}{10} + \dyad{10}{01} + \dyad{10}{10}\right) \\
+    &= \frac{\dyad{0} + \dyad{1}}{2} = \frac{I}{2} \\
+    \rho_{1}^{\beta_{01}} &= \nicefrac{1}{2}\; \textrm{tr}_{1}\left(\dyad{01}{01} + \dyad{01}{10} + \dyad{10}{01} + \dyad{10}{10}\right) \\
+    &= \frac{\dyad{0} + \dyad{1}}{2} = \frac{I}{2} \\
+    \end{split}
+    \quad\quad
+    \begin{split}
+    \rho_{0}^{\beta_{10}} &= \nicefrac{1}{2}\; \textrm{tr}_{0}\left(\dyad{00}{00} - \dyad{00}{11} - \dyad{11}{00} + \dyad{11}{11}\right) \\
+    &= \frac{\dyad{0} + \dyad{1}}{2} = \frac{I}{2} \\
+    \rho_{1}^{\beta_{10}} &= \nicefrac{1}{2}\; \textrm{tr}_{1}\left(\dyad{00}{00} - \dyad{00}{11} - \dyad{11}{00} + \dyad{11}{11}\right) \\
+    &= \frac{\dyad{0} + \dyad{1}}{2} = \frac{I}{2} \\
+    \rho_{0}^{\beta_{11}} &= \nicefrac{1}{2}\; \textrm{tr}_{0}\left(\dyad{01}{01} - \dyad{01}{10} - \dyad{10}{01} + \dyad{10}{10}\right) \\
+    &= \frac{\dyad{0} + \dyad{1}}{2} = \frac{I}{2} \\
+    \rho_{1}^{\beta_{11}} &= \nicefrac{1}{2}\; \textrm{tr}_{1}\left(\dyad{01}{01} - \dyad{01}{10} - \dyad{10}{01} + \dyad{10}{10}\right) \\
+    &= \frac{\dyad{0} + \dyad{1}}{2} = \frac{I}{2} \\
+    \end{split}
+    \end{aligned}\]
 \end{homeworkProblem}
 
 \begin{homeworkProblem}[12]
