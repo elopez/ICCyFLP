@@ -272,7 +272,146 @@
 
     \solution
 
-    TODO
+    \begin{enumerate}[label=(\alph*)]
+        \item La matriz densidad del primer sistema será
+        $\rho^{A} = \nicefrac{1}{4} \dyad{0} + \nicefrac{3}{4} \dyad{+}$
+        y la del segundo sistema será
+        $\rho^{A} = \nicefrac{3}{4} \dyad{1} + \nicefrac{1}{4} \dyad{-}$.
+        Por postulado 4, luego el estado del sistema completo compuesto
+        por ambos sistemas será
+        \[\begin{aligned}
+        \rho^{AB} &= \rho^{A} \otimes \rho^{B} \\
+        &= \left( \nicefrac{1}{4} \dyad{0} + \nicefrac{3}{4} \dyad{+} \right) \otimes \left(\nicefrac{3}{4} \dyad{1} + \nicefrac{1}{4} \dyad{-}\right) \\
+        &= \nicefrac{3}{16} \dyad{01} + \nicefrac{1}{16} \dyad{0-} + \nicefrac{9}{16} \dyad{+1} + \nicefrac{3}{16} \dyad{+-} \\
+        \end{aligned}\]
+        Para poder luego operar de forma más sencilla, expandiremos
+        la expresión para tener todo en función de $\ket{0}$ y $\ket{1}$:
+        \[\begin{aligned}
+        \rho^{AB} &= \nicefrac{3}{16} \dyad{01} +
+                     \nicefrac{1}{16} \left(\dyad{0} \otimes \dyad{-}\right) +
+                     \nicefrac{9}{16} \dyad{+1} + \nicefrac{3}{16} \dyad{+-} \\
+                  &= \nicefrac{3}{16} \dyad{01} +
+                     \nicefrac{1}{16} \left(\dyad{0} \otimes \nicefrac{1}{2} \left(\ket{0} - \ket{1}\right)\left(\bra{0} - \bra{1}\right)\right) +
+                     \nicefrac{9}{16} \dyad{+1} + \nicefrac{3}{16} \dyad{+-} \\
+                  &= \nicefrac{3}{16} \dyad{01} +
+                     \nicefrac{1}{32} \dyad{00} - \nicefrac{1}{32} \dyad{00}{01} - \nicefrac{1}{32} \dyad{01}{00} + \nicefrac{1}{32} \dyad{01} + \\
+                  &\quad\;\nicefrac{9}{16} \dyad{+1} + \nicefrac{3}{16} \dyad{+-}\\
+                  &= \nicefrac{3}{16} \dyad{01} +
+                     \nicefrac{1}{32} \dyad{00} - \nicefrac{1}{32} \dyad{00}{01} - \nicefrac{1}{32} \dyad{01}{00} + \nicefrac{1}{32} \dyad{01} + \\
+                  &\quad\;\nicefrac{9}{16} \nicefrac{1}{2} \left(\ket{0} + \ket{1}\right) \left(\bra{0} + \bra{1}\right) \otimes \dyad{1} + \nicefrac{3}{16} \dyad{+-} \\
+                  &= \nicefrac{3}{16} \dyad{01} +
+                     \nicefrac{1}{32} \dyad{00} - \nicefrac{1}{32} \dyad{00}{01} - \nicefrac{1}{32} \dyad{01}{00} + \nicefrac{1}{32} \dyad{01} + \\
+                  &\quad\;\nicefrac{9}{32} \dyad{01} + \nicefrac{9}{32} \dyad{01}{11} + \nicefrac{9}{32} \dyad{11}{01} + \nicefrac{9}{32} \dyad{11} + \nicefrac{3}{16} \dyad{+-} \\
+                  &= \nicefrac{3}{16} \dyad{01} +
+                     \nicefrac{1}{32} \dyad{00} - \nicefrac{1}{32} \dyad{00}{01} - \nicefrac{1}{32} \dyad{01}{00} + \nicefrac{1}{32} \dyad{01} + \\
+                  &\quad\;\nicefrac{9}{32} \dyad{01} + \nicefrac{9}{32} \dyad{01}{11} + \nicefrac{9}{32} \dyad{11}{01} + \nicefrac{9}{32} \dyad{11} + \\
+                  &\quad\;\nicefrac{3}{16} \nicefrac{1}{2} \left(\ket{0} + \ket{1}\right) \left(\bra{0} + \bra{1}\right) \otimes \nicefrac{1}{2} \left(\ket{0} - \ket{1}\right) \left(\bra{0} - \bra{1}\right) \\
+                  &= \nicefrac{3}{16} \dyad{01} +
+                     \nicefrac{1}{32} \dyad{00} - \nicefrac{1}{32} \dyad{00}{01} - \nicefrac{1}{32} \dyad{01}{00} + \nicefrac{1}{32} \dyad{01} + \\
+                  &\quad\;\nicefrac{9}{32} \dyad{01} + \nicefrac{9}{32} \dyad{01}{11} + \nicefrac{9}{32} \dyad{11}{01} + \nicefrac{9}{32} \dyad{11} + \\
+                  &\quad\;\nicefrac{3}{64} \left(\dyad{0} + \dyad{0}{1} + \dyad{1}{0} + \dyad{1}\right) \otimes \left(\dyad{0} - \dyad{0}{1} - \dyad{1}{0} + \dyad{1}\right)\\
+                  &= \nicefrac{3}{16} \dyad{01} +
+                     \nicefrac{1}{32} \dyad{00} - \nicefrac{1}{32} \dyad{00}{01} - \nicefrac{1}{32} \dyad{01}{00} + \nicefrac{1}{32} \dyad{01} + \\
+                  &\quad\;\nicefrac{9}{32} \dyad{01} + \nicefrac{9}{32} \dyad{01}{11} + \nicefrac{9}{32} \dyad{11}{01} + \nicefrac{9}{32} \dyad{11} + \nicefrac{3}{64} \dyad{00} -\\
+                  &\quad\;\nicefrac{3}{64} \dyad{00}{01} - \nicefrac{3}{64} \dyad{01}{00} + \nicefrac{3}{64} \dyad{01} + \nicefrac{3}{64} \dyad{00}{10} - \nicefrac{3}{64} \dyad{00}{11} - \nicefrac{3}{64} \dyad{01}{10} +\\
+                  &\quad\;\nicefrac{3}{64} \dyad{01}{11} + \nicefrac{3}{64} \dyad{10}{00} - \nicefrac{3}{64} \dyad{10}{01} - \nicefrac{3}{64} \dyad{11}{00} + \nicefrac{3}{64} \dyad{11}{01} + \nicefrac{3}{64} \dyad{10}{10} - \\
+                  &\quad\;\nicefrac{3}{64} \dyad{10}{11} - \nicefrac{3}{64} \dyad{11}{10} + \nicefrac{3}{64} \dyad{11}\\
+                  &= \nicefrac{5}{64} \dyad{00}{00} - \nicefrac{5}{64} \dyad{00}{01} + \nicefrac{3}{64} \dyad{00}{10} - \nicefrac{3}{64} \dyad{00}{11}-\\
+                  &\quad\;\nicefrac{5}{64} \dyad{01}{00} + \nicefrac{35}{64} \dyad{01}{01} - \nicefrac{3}{64} \dyad{01}{10} + \nicefrac{21}{64} \dyad{01}{11} +\\
+                  &\quad\;\nicefrac{3}{64} \dyad{10}{00} - \nicefrac{3}{64} \dyad{10}{01} + \nicefrac{3}{64} \dyad{10}{10} - \nicefrac{3}{64} \dyad{10}{11} - \\
+                  &\quad\;\nicefrac{3}{64} \dyad{11}{00} + \nicefrac{21}{64} \dyad{11}{01} - \nicefrac{3}{64} \dyad{11}{10} + \nicefrac{21}{64} \dyad{11}{11}
+        \end{aligned}\]
+
+        \item El postulado 3 enuncia que la probabilidad de obtener un resultado $m$
+        (es decir, que se aplique la matriz $M_{m}$ al medir) es
+        $p(m) = \textrm{tr} \left(M_{m}^{\dagger} M_{m} \rho\right)$,
+        donde $\rho$ es la matriz densidad del sistema. El sistema evoluciona
+        al estado $p(m)^{-1} M_{m} \rho M_{m}^{\dagger}$ luego de la medición.
+
+        Adicionalmente, es importante notar que $\bra{\phi}\ket{\psi} = 1 \iff \phi = \psi$ y
+        $\bra{\phi}\ket{\psi} = 0 \iff \phi \neq \psi$, para $\phi, \psi$ vectores de una base ortonormal.
+        Se usará este hecho para simplificar sustancialmente los cálculos.
+
+        En particular, para obtener 0 será
+        \[\begin{aligned}
+        p(0) &= \textrm{tr} \left( \left(\dyad{00}\right)^{\dagger} \dyad{00} \rho^{AB} \right) \\
+        &= \textrm{tr} \left( \dyad{00} \rho^{AB} \right) \\
+        &= \textrm{tr} \left( \nicefrac{5}{64}\ket{00}\bra{00}\ket{00}\bra{00} -
+                              \nicefrac{5}{64}\ket{00}\bra{00}\ket{00}\bra{01} +
+                              \nicefrac{3}{64}\ket{00}\bra{00}\ket{00}\bra{10} -
+                              \nicefrac{3}{64}\ket{00}\bra{00}\ket{00}\bra{11} \right) \\
+        &= \textrm{tr} \left( \nicefrac{5}{64}\dyad{00}{00} -
+                              \nicefrac{5}{64}\dyad{00}{01} +
+                              \nicefrac{3}{64}\dyad{00}{10} -
+                              \nicefrac{3}{64}\dyad{00}{11} \right) \\
+        &= \nicefrac{5}{64}
+        \end{aligned}\]
+        y evolucionará a
+        \[\begin{aligned}
+        \rho^{AB} \xrightarrow{M_{0}} p(0)^{-1} \dyad{00} \rho^{AB} \left(\dyad{00}\right)^{\dagger} =
+        \frac{64}{5} \dyad{00} \left(\frac{5}{64} \dyad{00}\right) \dyad{00} = \dyad{00}
+        \end{aligned}\]
+
+        Para obtener 1 será
+        \[\begin{aligned}
+        p(0) &= \textrm{tr} \left( \left(\dyad{11}\right)^{\dagger} \dyad{11} \rho^{AB} \right) \\
+        &= \textrm{tr} \left( \dyad{11} \rho^{AB} \right) \\
+        &= \textrm{tr} \left( -\nicefrac{3}{64}\ket{11}\bra{11}\ket{11}\bra{00} +
+                              \nicefrac{21}{64}\ket{11}\bra{11}\ket{11}\bra{01} -
+                              \nicefrac{3}{64}\ket{11}\bra{11}\ket{11}\bra{10} +
+                              \nicefrac{21}{64}\ket{11}\bra{11}\ket{11}\bra{11} \right) \\
+        &= \textrm{tr} \left( -\nicefrac{3}{64}\dyad{11}{00} +
+                              \nicefrac{21}{64}\dyad{11}{01} -
+                              \nicefrac{3}{64}\dyad{11}{10} +
+                              \nicefrac{21}{64}\dyad{11}{11} \right) \\
+        &= \nicefrac{21}{64}
+        \end{aligned}\]
+        y evolucionará a
+        \[\begin{aligned}
+        \rho^{AB} \xrightarrow{M_{1}} p(1)^{-1} \dyad{11} \rho^{AB} \left(\dyad{11}\right)^{\dagger} =
+        \frac{64}{21} \dyad{11} \left(\frac{21}{64} \dyad{11}\right) \dyad{11} = \dyad{11}
+        \end{aligned}\]
+
+        Para obtener 2 será
+        \[\begin{aligned}
+        p(0) &= \textrm{tr} \left( \left(\dyad{01}\right)^{\dagger} \dyad{01} \rho^{AB} \right) \\
+        &= \textrm{tr} \left( \dyad{01} \rho^{AB} \right) \\
+        &= \textrm{tr} \left(-\nicefrac{5}{64}\ket{01}\bra{01}\ket{01}\bra{00} +
+                              \nicefrac{35}{64}\ket{01}\bra{01}\ket{01}\bra{01} -
+                              \nicefrac{3}{64}\ket{01}\bra{01}\ket{01}\bra{10} +
+                              \nicefrac{21}{64}\ket{01}\bra{01}\ket{01}\bra{11} \right) \\
+        &= \textrm{tr} \left(-\nicefrac{5}{64}\dyad{01}{00} +
+                              \nicefrac{35}{64}\dyad{01}{01} -
+                              \nicefrac{3}{64}\dyad{01}{10} +
+                              \nicefrac{21}{64}\dyad{01}{11} \right) \\
+        &= \nicefrac{35}{64}
+        \end{aligned}\]
+        y evolucionará a
+        \[\begin{aligned}
+        \rho^{AB} \xrightarrow{M_{2}} p(2)^{-1} \dyad{01} \rho^{AB} \left(\dyad{01}\right)^{\dagger} =
+        \frac{64}{35} \dyad{01} \left(\frac{35}{64} \dyad{01}\right) \dyad{01} = \dyad{01}
+        \end{aligned}\]
+
+        Para obtener 3 será
+        \[\begin{aligned}
+        p(0) &= \textrm{tr} \left( \left(\dyad{10}\right)^{\dagger} \dyad{10} \rho^{AB} \right) \\
+        &= \textrm{tr} \left( \dyad{10} \rho^{AB} \right) \\
+        &= \textrm{tr} \left(-\nicefrac{3}{64}\ket{10}\bra{10}\ket{10}\bra{00} -
+                              \nicefrac{3}{64}\ket{10}\bra{10}\ket{10}\bra{01} +
+                              \nicefrac{3}{64}\ket{10}\bra{10}\ket{10}\bra{10} -
+                              \nicefrac{3}{64}\ket{10}\bra{10}\ket{10}\bra{11} \right) \\
+        &= \textrm{tr} \left(-\nicefrac{3}{64}\dyad{10}{00} -
+                              \nicefrac{3}{64}\dyad{10}{01} +
+                              \nicefrac{3}{64}\dyad{10}{10} -
+                              \nicefrac{3}{64}\dyad{10}{11} \right) \\
+        &= \nicefrac{3}{64}
+        \end{aligned}\]
+        y evolucionará a
+        \[\begin{aligned}
+        \rho^{AB} \xrightarrow{M_{3}} p(3)^{-1} \dyad{10} \rho^{AB} \left(\dyad{10}\right)^{\dagger} =
+        \frac{64}{3} \dyad{10} \left(\frac{3}{64} \dyad{10}\right) \dyad{10} = \dyad{10}
+        \end{aligned}\]
+    \end{enumerate}
 \end{homeworkProblem}
 
 \begin{homeworkProblem}[16]
@@ -287,7 +426,39 @@
 
     \solution
 
-    TODO
+    Dado que $\{\ket{0}, \ket{1}\}$ y $\{\ket{+}, \ket{-}\}$ son bases
+    ortonormales de $\mathbb{C}^{2}$, podemos aplicar la descomposición
+    de Schmidt a estos estados y obtener fácilmente los operadores densidad
+    reducidos (Teorema 3.28 y Corolario 3.29 del apunte).
+
+    \begin{enumerate}[label=(\alph*)]
+        \item $\rho^{0} = \left(\nicefrac{1}{\sqrt{2}}\right)^{2} \; (\dyad{0} + \dyad{1})
+                        = \nicefrac{1}{2} \dyad{0} + \nicefrac{1}{2} \dyad{1}$
+
+        A su vez, $\textrm{tr}\left(\left(\rho^{0}\right)^{2}\right) = \left(\nicefrac{1}{2} \dyad{0} + \nicefrac{1}{2} \dyad{1}\right) \left(\nicefrac{1}{2} \dyad{0} + \nicefrac{1}{2} \dyad{1}\right)
+            = \nicefrac{1}{4} \dyad{0} + \nicefrac{1}{4} \dyad{1} = \nicefrac{1}{2}$
+
+        Como $\textrm{tr}\left(\left(\rho^{0}\right)^{2}\right) < 1$, se
+        puede concluir que $\rho^{0}$ es un operador densidad
+        correspondiente a un estado mixto. Por lo tanto, $\rho$ está
+        enredado.
+
+        \item $\rho^{0} = \left(\nicefrac{1}{\sqrt{2}}\right)^{2} \; (\dyad{+} + \dyad{-})
+                        = \nicefrac{1}{2} \dyad{+} + \nicefrac{1}{2} \dyad{-}$
+
+        Luego, $\textrm{tr}\left(\left(\rho^{0}\right)^{2}\right) = \left(\nicefrac{1}{2} \dyad{+} + \nicefrac{1}{2} \dyad{-}\right) \left(\nicefrac{1}{2} \dyad{+} + \nicefrac{1}{2} \dyad{-}\right)
+            = \nicefrac{1}{4} \dyad{+} + \nicefrac{1}{4} \dyad{-} = \nicefrac{1}{2} < 1$
+
+        Por lo tanto, $\rho$ está enredado.
+
+        \item $\rho^{0} = \left(\nicefrac{1}{\sqrt{3}}\right)^{2} \; (\dyad{+} + \dyad{+} + \dyad{-})
+                        = \nicefrac{2}{3} \dyad{+} + \nicefrac{1}{3} \dyad{-}$
+
+        Luego, $\textrm{tr}\left(\left(\rho^{0}\right)^{2}\right) = \left(\nicefrac{2}{3} \dyad{+} + \nicefrac{1}{3} \dyad{-}\right) \left(\nicefrac{2}{3} \dyad{+} + \nicefrac{1}{3} \dyad{-}\right)
+            = \nicefrac{4}{9} \dyad{+} + \nicefrac{1}{9} \dyad{-} = \nicefrac{5}{9} < 1$
+
+        Por lo tanto, $\rho$ también está enredado en este caso.
+    \end{enumerate}
 \end{homeworkProblem}
 
 \end{document}
