@@ -280,8 +280,8 @@
         &= \left( \nicefrac{1}{4} \dyad{0} + \nicefrac{3}{4} \dyad{+} \right) \otimes \left(\nicefrac{3}{4} \dyad{1} + \nicefrac{1}{4} \dyad{-}\right) \\
         &= \nicefrac{3}{16} \dyad{01} + \nicefrac{1}{16} \dyad{0-} + \nicefrac{9}{16} \dyad{+1} + \nicefrac{3}{16} \dyad{+-} \\
         \end{aligned}\]
-        Para poder luego operar de forma más sencilla, expandiremos
-        la expresión para tener todo en función de $\ket{0}$ y $\ket{1}$:
+        Para poder luego operar de forma más sencilla, se expande
+        $\rho^{AB}$ en función de $\ket{0}$ y $\ket{1}$:
         \[\begin{aligned}
         \rho^{AB} &= \nicefrac{3}{16} \dyad{01} +
                      \nicefrac{1}{16} \left(\dyad{0} \otimes \dyad{-}\right) +
@@ -431,8 +431,8 @@
         \item $\rho^{0} = \left(\nicefrac{1}{\sqrt{2}}\right)^{2} \; (\dyad{0} + \dyad{1})
                         = \nicefrac{1}{2} \dyad{0} + \nicefrac{1}{2} \dyad{1}$
 
-        A su vez, $\textrm{tr}\left(\left(\rho^{0}\right)^{2}\right) = \left(\nicefrac{1}{2} \dyad{0} + \nicefrac{1}{2} \dyad{1}\right) \left(\nicefrac{1}{2} \dyad{0} + \nicefrac{1}{2} \dyad{1}\right)
-            = \nicefrac{1}{4} \dyad{0} + \nicefrac{1}{4} \dyad{1} = \nicefrac{1}{2}$
+        A su vez, $\textrm{tr}\left(\left(\rho^{0}\right)^{2}\right) = \textrm{tr}\left(\left(\nicefrac{1}{2} \dyad{0} + \nicefrac{1}{2} \dyad{1}\right) \left(\nicefrac{1}{2} \dyad{0} + \nicefrac{1}{2} \dyad{1}\right)\right)
+            = \textrm{tr}\left(\nicefrac{1}{4} \dyad{0} + \nicefrac{1}{4} \dyad{1}\right) = \nicefrac{1}{2}$
 
         Como $\textrm{tr}\left(\left(\rho^{0}\right)^{2}\right) < 1$, se
         puede concluir que $\rho^{0}$ es un operador densidad
@@ -442,16 +442,16 @@
         \item $\rho^{0} = \left(\nicefrac{1}{\sqrt{2}}\right)^{2} \; (\dyad{+} + \dyad{-})
                         = \nicefrac{1}{2} \dyad{+} + \nicefrac{1}{2} \dyad{-}$
 
-        Luego, $\textrm{tr}\left(\left(\rho^{0}\right)^{2}\right) = \left(\nicefrac{1}{2} \dyad{+} + \nicefrac{1}{2} \dyad{-}\right) \left(\nicefrac{1}{2} \dyad{+} + \nicefrac{1}{2} \dyad{-}\right)
-            = \nicefrac{1}{4} \dyad{+} + \nicefrac{1}{4} \dyad{-} = \nicefrac{1}{2} < 1$
+        $\textrm{tr}\left(\left(\rho^{0}\right)^{2}\right) = \textrm{tr}\left(\left(\nicefrac{1}{2} \dyad{+} + \nicefrac{1}{2} \dyad{-}\right) \left(\nicefrac{1}{2} \dyad{+} + \nicefrac{1}{2} \dyad{-}\right)\right)
+            = \textrm{tr}\left(\nicefrac{1}{4} \dyad{+} + \nicefrac{1}{4} \dyad{-}\right) = \nicefrac{1}{2} < 1$
 
-        Por lo tanto, $\rho$ está enredado.
+        Por lo tanto, $\rho$ nuevamente está enredado.
 
         \item $\rho^{0} = \left(\nicefrac{1}{\sqrt{3}}\right)^{2} \; (\dyad{+} + \dyad{+} + \dyad{-})
                         = \nicefrac{2}{3} \dyad{+} + \nicefrac{1}{3} \dyad{-}$
 
-        Luego, $\textrm{tr}\left(\left(\rho^{0}\right)^{2}\right) = \left(\nicefrac{2}{3} \dyad{+} + \nicefrac{1}{3} \dyad{-}\right) \left(\nicefrac{2}{3} \dyad{+} + \nicefrac{1}{3} \dyad{-}\right)
-            = \nicefrac{4}{9} \dyad{+} + \nicefrac{1}{9} \dyad{-} = \nicefrac{5}{9} < 1$
+        $\textrm{tr}\left(\left(\rho^{0}\right)^{2}\right) = \textrm{tr}\left(\left(\nicefrac{2}{3} \dyad{+} + \nicefrac{1}{3} \dyad{-}\right) \left(\nicefrac{2}{3} \dyad{+} + \nicefrac{1}{3} \dyad{-}\right)\right)
+            = \textrm{tr}\left(\nicefrac{4}{9} \dyad{+} + \nicefrac{1}{9} \dyad{-}\right) = \nicefrac{5}{9} < 1$
 
         Por lo tanto, $\rho$ también está enredado en este caso.
     \end{enumerate}
