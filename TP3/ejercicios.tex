@@ -1,0 +1,201 @@
+\documentclass{article}
+
+\usepackage[spanish,american]{babel}
+\usepackage{fontspec}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumitem}
+\usepackage{physics}
+\usepackage{units}
+\usepackage{comment}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass: \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{El ejercicio \arabic{#1} continúa en la página siguiente\ldots}\nobreak{}
+    \nobreak\extramarks{Ejercicio \arabic{#1} (cont.)}{El ejercicio \arabic{#1} continúa en la página siguiente\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Ejercicio \arabic{#1} (cont.)}{El ejercicio \arabic{#1} continúa en la página siguiente\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Ejercicio \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Ejercicio \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Ejercicio \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Trabajo Práctico 3}
+\newcommand{\hmwkDueDate}{18 de Noviembre de 2016}
+\newcommand{\hmwkClass}{Computación cuántica}
+\newcommand{\hmwkClassLong}{Introducción a la computación cuántica y fundamentos de lenguajes de programación}
+\newcommand{\hmwkClassInstructor}{Profesor Alejandro Díaz-Caro}
+\newcommand{\hmwkAuthorName}{Emilio López}
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass\footnote{Formalmente ``\hmwkClassLong''}:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Fecha\ de\ entrega:\ \hmwkDueDate}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor}}
+    \vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Parte \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\vspace{1em}\textbf{\large Solución}\vspace{.5em}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\newcommand{\nat}{\mathrm{nat}}
+
+\newcommand{\Le}[3]{\lambda #1 : #2 \;.\; #3}
+\newcommand{\Me}[3]{\mu #1 : #2 \;.\; #3}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}[37]
+    Dar la semántica operacional a grandes pasos, a pequeños pasos y la
+    denotacional a los siguientes términos:
+
+    \begin{enumerate}[label=(\alph*)]
+        \setcounter{enumi}{4}
+        \item $\left( \Le{x}{\nat}{\Me{x}{\nat}{x + 1}} \right) \left(\left(\Le{x}{\nat}{x}\right) 2\right)$
+        \item $\Me{f}{\nat \Rightarrow \nat}{\Le{n}{\nat}{\Le{m}{\nat}{m\; ?\; 1\; :\; n \times f\; n\; (m-1)}}}$
+    \end{enumerate}
+
+    \solution
+
+    TODO
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[38]
+    Modificar la semántica denotacional incluyendo el elemento
+    \emph{error} en todo conjunto, con el fin de detectar la división
+    por 0.
+
+    \solution
+
+    TODO
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[40]
+    Probar el teorema 4.46.
+
+    \solution
+
+    TODO
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[41]
+    Probar el teorema de soundness (4.47).
+
+    \solution
+
+    TODO
+\end{homeworkProblem}
+
+\end{document}
