@@ -1,6 +1,6 @@
 \documentclass{article}
 
-\usepackage[spanish,american]{babel}
+\usepackage[spanish]{babel}
 \usepackage{fontspec}
 
 \usepackage{fancyhdr}
@@ -17,8 +17,21 @@
 \usepackage{units}
 \usepackage{comment}
 \usepackage{mathtools}
+\usepackage{stmaryrd}
+\usepackage{bussproofs}
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
+
+\theoremstyle{definition}
+\newtheorem{case}{Caso}
+
+\makeatletter
+\newcases{dlrcases}{\quad}{%
+  $\m@th\displaystyle{##}$\hfil}{$\m@th\displaystyle{##}$\hfil}{\lbrace}{\rbrace}
+\newcases{lrcases}{\quad}{%
+  $\m@th{##}$\hfil}{{##}\hfil}{\lbrace}{\rbrace}
+\makeatother
 
 \usetikzlibrary{automata,positioning}
 
@@ -151,6 +164,8 @@
 \newcommand{\Le}[3]{\lambda #1 : #2 \;.\; #3}
 \newcommand{\Me}[3]{\mu #1 : #2 \;.\; #3}
 
+\newcommand{\Val}[2][\theta]{\left\llbracket #2 \right\rrbracket_{#1}}
+
 \begin{document}
 
 \maketitle
@@ -169,7 +184,62 @@
 
     \solution
 
-    TODO
+    \begin{enumerate}[label=(\alph*)]
+        \setcounter{enumi}{4}
+        \item \textbf{Semántica operacional a pequeños pasos}
+        \[\begin{aligned}
+        \left( \Le{x}{\nat}{\Me{x}{\nat}{x + 1}} \right) \left(\left(\Le{x}{\nat}{x}\right) 2\right) &= \left( {\Me{x}{\nat}{x + 1}} \right)[\left(\left(\Le{x}{\nat}{x}\right) 2\right)/x]\\
+        &= \left( {\Me{x}{\nat}{x + 1}} \right)\\
+        &= \left( x+1 \right)[\left(\Me{x}{\nat}{x + 1}\right)/x]\\
+        &= \left(\Me{x}{\nat}{x + 1}\right)+1\\
+        &= \text{... (no termina, teorema 4.43)}
+        \end{aligned}\]
+
+        \textbf{Semántica operacional a grandes pasos}
+
+        Sea \[\begin{aligned}
+        A &= \Gamma \vdash \Le{x}{\nat}{\Me{x}{\nat}{x + 1}} \hookrightarrow \langle x, \Me{x}{\nat}{x + 1}, \Gamma' \rangle\\
+        B &= \Gamma', x=\langle \left(\left(\Le{x}{\nat}{x}\right) 2\right), \Gamma' \rangle \vdash \Me{x}{\nat}{x + 1} \hookrightarrow \Me{x}{\nat}{x + 1}
+        \end{aligned}\]
+
+        \begin{prooftree}
+        \AxiomC{A}
+        \AxiomC{B}
+        \BinaryInfC{$\vdash \left(\Le{x}{\nat}{\Me{x}{\nat}{x + 1}} \right) \left(\left(\Le{x}{\nat}{x}\right) 2\right) \hookrightarrow \Me{x}{\nat}{x + 1}$}
+        \end{prooftree}
+
+        \textbf{Semántica denotacional}
+        \[\begin{aligned}
+        \Val{\left( \Le{x}{\nat}{\Me{x}{\nat}{x + 1}} \right) \left(\left(\Le{x}{\nat}{x}\right) 2\right)} &= \Val{\Le{x}{\nat}{\Me{x}{\nat}{x + 1}}} \Val{\left(\Le{x}{\nat}{x}\right) 2}\\
+        &= \left(\Le{a}{\Val[]{nat}}{\Val[\theta,x=a]{\Me{x}{\nat}{x + 1}}}\right) \Val{\left(\Le{x}{\nat}{x}\right) 2}\\
+        &= \left(\Le{a}{\mathbb{N}}{\bot_{\mathbb{N}}}\right) \Val{\left(\Le{x}{\nat}{x}\right) 2}\\
+        &= \bot_{\mathbb{N}}
+        \end{aligned}\]
+
+        \item \textbf{Semántica operacional a pequeños pasos}
+
+        Sea $Exp = \Me{f}{\nat \Rightarrow \nat}{\Le{n}{\nat}{\Le{m}{\nat}{m\; ?\; 1\; :\; n \times f\; n\; (m-1)}}}$
+        \[\begin{aligned}
+        Exp &= \left(\Le{m}{\nat}{m\; ?\; 1\; :\; n \times f\; n\; (m-1)}\right)[Exp/f]\\
+        &= \left(\Le{m}{\nat}{m\; ?\; 1\; :\; n \times Exp\; n\; (m-1)}\right)
+        \end{aligned}\]
+
+        \textbf{Semántica operacional a grandes pasos}
+
+        Sea \[\begin{aligned}
+        Exp &= \Me{f}{\nat \Rightarrow \nat}{\Le{n}{\nat}{\Le{m}{\nat}{m\; ?\; 1\; :\; n \times f\; n\; (m-1)}}}\\
+        LN &=  \Le{n}{\nat}{\Le{m}{\nat}{m\; ?\; 1\; :\; n \times f\; n\; (m-1)}}\\
+        LM &=  \Le{m}{\nat}{m\; ?\; 1\; :\; n \times f\; n\; (m-1)}
+        \end{aligned}\]
+
+
+        \begin{prooftree}
+        \AxiomC{$\Gamma,f=\langle Exp, \Gamma\rangle \vdash LN \hookrightarrow \langle n, LM, \left(\Gamma,f=\langle Exp, \Gamma\rangle\right)\rangle$}
+        \UnaryInfC{$\vdash Exp \hookrightarrow \langle n, LM, \left(\Gamma,f=\langle Exp, \Gamma\rangle\right)\rangle$}
+        \end{prooftree}
+
+        \textbf{Semántica denotacional}
+    \end{enumerate}
 \end{homeworkProblem}
 
 \begin{homeworkProblem}[38]
@@ -179,11 +249,61 @@
 
     \solution
 
-    TODO
+    Sea el elemento \emph{error} un habitante de todos los conjuntos,
+    la semántica denotacional de PCF con detección de división por cero
+    queda definida de la siguiente manera:
+
+    \newcommand{\err}{\textrm{error}}
+    \[\begin{aligned}
+    \Val{n} &= n \\
+    \Val{x} &= \theta(x)\\
+    \Val{\Le{x}{A}{t}} &= \begin{cases}
+        \err & \textrm{si } \err = \Val{t} \\
+        \Le{a}{\Val[]{A}}{\Val[\theta,x=a]{t}} & \textrm{en otro caso}
+        \end{cases}\\
+    \Val{t\; r} &= \begin{cases}
+        \err & \textrm{si } \err \in \{\Val{t}, \Val{r}\} \\
+        \Val{t}\; \Val{r} & \textrm{en otro caso}
+    \end{cases}\\
+    %\Val{\err} &= \err\\
+    \Val{t \odot r} &= \begin{cases}
+        \err & \textrm{si } \err \in \{\Val{t}, \Val{r}\} \\
+        \err & \textrm{si } \odot \textrm{ es la división y } \Val{r} = 0\\
+        \Val{t} \odot \Val{r} & \textrm{si no, y } \Val{t}, \Val{r} \in \mathbb{N}\\
+        \bot_{\mathbb{N}} & \textrm{en otro caso}
+    \end{cases}\\
+    \Val{t\; ?\; r : s} &= \begin{cases}
+        \err & \textrm{si } \err \in \{\Val{t}, \Val{r}, \Val{s}\} \\
+        \Val{r} & \textrm{si no, y } \Val{t} = 0\\
+        \Val{s} & \textrm{si no, y } \Val{t} \in \mathbb{N}^{*}\\
+        \bot_{\mathbb{A}} & \textrm{si no, y } \Val{t} = \bot_{\mathbb{N}} \textrm{ y A es el tipo del término}
+    \end{cases}\\
+    \Val{\textrm{let }x : A = r \textrm{ in } t} &= \begin{cases}
+        \err & \textrm{si } \err \in \{\Val[\theta,x=\Val{r}]{t}, \Val{r}\} \\
+        \Val[\theta,x=\Val{r}]{t} & \textrm{en otro caso}
+    \end{cases}\\
+    \Me{x}{A}{t}  &= \begin{cases}
+        \err & \textrm{si } \err = \Val{t} \\
+        \mathrm{FIX}(\Le{a}{\Val[]{A}}{\Val[\theta,x=a]{t}}) & \textrm{en otro caso}
+    \end{cases}\\
+    \end{aligned}\]
+
+    Vale notar que esta semántica denotacional no captura todos los
+    errores posibles. Por ejemplo
+    \[\begin{aligned}
+    \Val{\left(\Le{x}{nat}{10/x}\right) 0} &= \Val{\Le{x}{nat}{10/x}} \Val{0} \\
+    &= \left(\Le{a}{\Val[]{nat}}{\Val[\theta,x=a]{10/x}}\right) 0\\
+    &= \left(\Le{a}{\mathbb{N}}{\Val[\theta,x=a]{10}/\Val[\theta,x=a]{x}}\right) 0\\
+    &= \left(\Le{a}{\mathbb{N}}{10/a}\right) 0\\
+    \end{aligned}\]
+
+    lo que resulta en una división por cero.
 \end{homeworkProblem}
 
 \begin{homeworkProblem}[40]
-    Probar el teorema 4.46.
+    Probar el teorema (4.45): Si $\Gamma \vdash t : A$, entonces para
+    toda valuación $\theta$ válida en $\Gamma$ se tiene
+    $\Val{t} \in \llbracket A \rrbracket$
 
     \solution
 
@@ -191,11 +311,184 @@
 \end{homeworkProblem}
 
 \begin{homeworkProblem}[41]
-    Probar el teorema de soundness (4.47).
+    Probar el teorema de soundness (4.46): Si $\Gamma \vdash t : A$ y
+    $t \rightarrow r$, entonces para toda valuación $\theta$ válida en
+    $\Gamma$ se tiene
+    $\llbracket t \rrbracket_{\theta} = \llbracket r \rrbracket_{\theta}$.
 
     \solution
 
-    TODO
+    Para poder completar esta prueba es necesario probar de antemano el
+    siguiente lema: $\Val{u[t/x]} = \Val[\theta,x=\Val{t}]{u}$. Para ello
+    se procede por inducción estructural sobre u.
+
+    \begin{proof}
+    \begin{case}{$u = n$.}
+    Dado que $n[t/x] = n$, se concluye que $\Val{n[t/x]} = \Val[\theta,x=\Val{t}]{n}$.
+    \end{case}
+    \begin{case}{$u = x$.}
+    Dado que $x[t/x] = t$, es claro que $\Val{x[t/x]} = \Val{t} = \Val[\theta,x=\Val{t}]{x}$.
+    \end{case}
+    \begin{case}{$u = y, y \neq x$.}
+    En este caso $y[t/x] = y$, luego $\Val{y[t/x]} = \Val[\theta,x=\Val{t}]{y}$.
+    \end{case}
+    \begin{case}{$u = \Le{y}{C}{r}$.} Sin pérdida de generalidad, asumamos que
+    $y \notin FV(t)$ (caso contrario, se renombrará $y$ en $t$). Por hipótesis
+    inductiva sabemos que $\Val{r[t/x]} = \Val[\theta,x=\Val{t}]{r}$. Luego
+    \[\Val{\left(\Le{y}{C}{r}\right)[t/x]} = \begin{cases}
+        \Val{\left(\Le{y}{C}{r}\right)} = \Le{a}{\Val[]{C}}{\Val[\theta,y=a]{r}} & \textrm{si } x = y\\
+        \Val{\left(\Le{y}{C}{r[t/x]}\right)} = \Le{a}{\Val[]{C}}{\Val[\theta,y=a]{r[t/x]}} = \Le{a}{\Val[]{C}}{\Val[\theta,x=\Val{t},y=a]{r}} & \textrm{si } x \neq y
+    \end{cases}\]
+    Si consideramos $\theta$ del primer caso como $\theta,x=\Val[\theta]{t}$,
+    hecho que no varía el entorno de la evaluación ya que $x=y$ y luego aparece
+    $y=a$, resulta en ambos casos $\Le{a}{\Val[]{C}}{\Val[\theta,x=\Val{t},y=a]{r}} = \Val[\theta,x=\Val{t}]{\Le{y}{C}{r}}$.
+    \end{case}
+    \begin{case}{$u = r\; s$.}
+    Ya que $(r\; s)[t/x] = r[t/x]\; s[t/x]$, por hipótesis de inducción
+    vale que \[\Val{r[t/x]} = \Val[\theta,x=\Val{t}]{r} \;\textrm{ y }\;
+    \Val{s[t/x]} = \Val[\theta,x=\Val{t}]{s}\]
+    De ello resulta que
+    $\Val{(r\; s)[t/x]} = \Val{r[t/x]\; s[t/x]} = \Val{r[t/x]} \Val{s[t/x]} = \Val[\theta,x=\Val{t}]{r} \Val[\theta,x=\Val{t}]{s} = \Val[\theta,x=\Val{t}]{r\; s}$
+    \end{case}
+    \begin{case}{$u = r \odot s$.}
+    Dado que $(r \odot s)[t/x] = r[t/x] \odot s[t/x]$, por hipótesis de
+    inducción vale que \[\Val{r[t/x]} = \Val[\theta,x=\Val{t}]{r} \;\textrm{ y }\;
+    \Val{s[t/x]} = \Val[\theta,x=\Val{t}]{s}\]
+    Luego $\Val{(r \odot s)[t/x]} = \Val{r[t/x] \odot s[t/x]} = \Val{r[t/x]} \odot \Val{s[t/x]} = \Val[\theta,x=\Val{t}]{r} \odot \Val[\theta,x=\Val{t}]{s} = \Val[\theta,x=\Val{t}]{r \odot s}$
+    \end{case}
+    \begin{case}{$u = r\; ?\; s : o$.}
+    Dado que $(r\; ?\; s : o)[t/x] = r[t/x]\; ?\; s[t/x] : o[t/x]$, por hipótesis de
+    inducción vale que \[\Val{r[t/x]} = \Val[\theta,x=\Val{t}]{r} \;\textrm{ y }\;
+    \Val{s[t/x]} = \Val[\theta,x=\Val{t}]{s} \;\textrm{ y }\;
+    \Val{o[t/x]} = \Val[\theta,x=\Val{t}]{o}\]
+    De ello se desprende que
+    \[\begin{aligned}
+    \Val{(r\; ?\; s : o)[t/x]} &= \Val{r[t/x]\; ?\; s[t/x] : o[t/x]}\\ &=\begin{dlrcases}
+    \Val{s[t/x]} = \Val[\theta,x=\Val{t}]{s} & \textrm{si } \Val{r[t/x]} = \Val[\theta,x=\Val{t}]{r} = 0\\
+    \Val{o[t/x]} = \Val[\theta,x=\Val{t}]{o} &  \textrm{si } \Val{r[t/x]} = \Val[\theta,x=\Val{t}]{r} \in \mathbb{N}\\
+    \bot_{\mathbb{A}} & \textrm{si } \Val{r[t/x]} = \Val[\theta,x=\Val{t}]{r} = \bot_{\mathbb{N}} \textrm{ y A es el tipo del término}
+    \end{dlrcases} \\&= \Val[\theta,x=\Val{t}]{r\; ?\; s : o}
+    \end{aligned}\]
+    \end{case}
+    \begin{case}{$\Me{y}{C}{r}$.}
+    Sin pérdida de generalidad, asumamos que $y \notin FV(t)$
+    (caso contrario, se renombrará $y$ en $t$). Por hipótesis inductiva
+    sabemos que $\Val{r[t/x]} = \Val[\theta,x=\Val{t}]{r}$. Luego
+    \[\Val{\left(\Me{y}{C}{r}\right)[t/x]} = \begin{cases}
+        \Val{\left(\Me{y}{C}{r}\right)} = \textrm{FIX}(\Le{a}{\Val[]{C}}{\Val[\theta,y=a]{r}}) & \textrm{si } x = y\\
+        \textrm{FIX}(\Le{a}{\Val[]{C}}{\Val[\theta,y=a]{r[t/x]}}) = \textrm{FIX}(\Le{a}{\Val[]{C}}{\Val[\theta,x=\Val{t},y=a]{r}}) & \textrm{si } x \neq y
+    \end{cases}\]
+    Si consideramos $\theta$ del primer caso como $\theta,x=\Val[\theta]{t}$,
+    hecho que no varía el entorno de la evaluación ya que $x=y$ y luego aparece
+    $y=a$, resulta en ambos casos $\textrm{FIX}(\Le{a}{\Val[]{C}}{\Val[\theta,x=\Val{t},y=a]{r}}) = \Val[\theta,x=\Val{t}]{\Me{y}{C}{r}}$.
+    \end{case}
+    \begin{case}{$\textrm{let } y : C = r \textrm{ in } s$.}
+        TODO
+    \end{case}
+    \end{proof}
+    \setcounter{case}{0}
+    Luego se realiza inducción sobre la relación $\rightarrow$.
+    \begin{proof}[Casos base:]
+    \begin{case}{$p \odot q \rightarrow n$.}
+    Por definición, $\Val{p \odot q} = \Val{p} \odot \Val{q}$ si
+    $\Val{p}, \Val{q} \in \mathbb{N}$. Por hipótesis,
+    $p \odot q \rightarrow n$. A su vez, $\Val{p} = p$,
+    $\Val{q} = q$, $\Val{n} = n$. Luego
+    $\Val{p} \odot \Val{q} = p \odot q = n = \Val{n}$, que vale.
+    \end{case}
+
+    \begin{case}{$0\; ?\; t : u \rightarrow t$.}
+    Por definición, $\Val{0\; ?\; t : u} = \Val{t}$. Por hipótesis,
+    $0\; ?\; t : u \rightarrow t$ y trivialmente resulta
+    $\Val{t} = \Val{t}$.
+    \end{case}
+
+    \begin{case}{$1\; ?\; t : u \rightarrow u$.}
+    Por definición, $\Val{1\; ?\; t : u} = \Val{u}$. Por hipótesis,
+    $1\; ?\; t : u \rightarrow u$ y análogamente se observa que
+    $\Val{u} = \Val{u}$.
+    \end{case}
+
+    \begin{case}{$\Me{x}{A}{t} \rightarrow t [\Me{x}{A}{t}/x]$.}
+    Por definición, $\Val{\Me{x}{A}{t}} = \mathrm{FIX}(\Le{a}{\Val[]{A}}{\Val[\theta,x=a]{t}})$.
+    A su vez, por definición de punto fijo,
+    $\left(\Le{a}{\Val{A}}{\Val[\theta,x=a]{t}}\right) \mathrm{FIX}(\Le{a}{\Val[]{A}}{\Val[\theta,x=a]{t}}) = \mathrm{FIX}(\Le{a}{\Val[]{A}}{\Val[\theta,x=a]{t}})$.
+    Aplicando resulta $\Val[\theta,x=\mathrm{FIX}(\Le{a}{\Val[]{A}}{\Val[\theta,x=a]{t}})]{t}$.
+    Por lema e hipótesis, esto equivale a $\Val{t [\Me{x}{A}{t}/x]}$
+    \end{case}
+
+    \begin{case}{$\textrm{let } x : A = t \textrm{ in } u \rightarrow u[t/x]$.}
+    Por definición, $\Val{\textrm{let } x : A = t \textrm{ in } u} = \Val[\theta,x=\Val{t}]{u}$.
+    Por hipótesis, $\textrm{let } x : A = t \textrm{ in } u \rightarrow u[t/x]$,
+    y $\Val{u[t/x]}$ equivale a $\Val[\theta,x=\Val{t}]{u}$ por lema.
+    \end{case}
+
+    \begin{case}{$\left(\Le{x}{A}{u}\right) t \rightarrow u[t/x]$.}
+    Análogo al caso anterior.
+    \end{case}
+    \end{proof}
+    \setcounter{case}{0}
+    \begin{proof}[Reglas de congruencia:]
+    \begin{case}{\AxiomC{$t \rightarrow u$}\UnaryInfC{$t\; v \rightarrow u\; v$}\DisplayProof}
+    Por hipótesis, $\Val{t} = \Val{u}$. Luego $\Val{t} \Val{v} = \Val{u} \Val{v}$.
+    \end{case}
+    \begin{case}{\AxiomC{$t \rightarrow u$}\UnaryInfC{$v\; t \rightarrow v\; u$}\DisplayProof}
+    Análogo al caso anterior.
+    \end{case}
+    \begin{case}{\AxiomC{$t \rightarrow u$}\UnaryInfC{$\Le{x}{A}{t} \rightarrow \Le{x}{A}{u}$}\DisplayProof}
+    Por hipótesis, $\Val[\rho]{t} = \Val[\rho]{u}$. Por definición de semántica denotacional,
+    \[\Val{\Le{x}{A}{t}} = \Le{a}{\Val[]{A}}{\Val[\theta,x=a]{t}}\]
+    En particular con $\rho = \theta,x=a$ resulta
+    \[\Le{a}{\Val[]{A}}{\Val[\theta,x=a]{t}} = \Le{a}{\Val[]{A}}{\Val[\theta,x=a]{u}}\]
+    que es la semántica denotacional de $\Le{x}{A}{u}$.
+    \end{case}
+    \begin{case}{\AxiomC{$t \rightarrow u$}\UnaryInfC{$t \odot v \rightarrow u \odot v$}\DisplayProof}
+    Por hipótesis, $\Val{t} = \Val{u}$. Luego si $\Val{t}, \Val{u} \in \mathbb{N}$ resulta
+    \[\Val{t \odot v} = \Val{t} \odot \Val{v} = \Val{u} \odot \Val{v} = \Val{u \odot v}\]
+    y si $\Val{t}, \Val{u} \notin \mathbb{N}$, vale $\Val{t \odot v} = \bot_{\mathbb{N}} = \Val{u \odot v}$.
+    \end{case}
+    \begin{case}{\AxiomC{$t \rightarrow u$}\UnaryInfC{$v \odot t \rightarrow v \odot u$}\DisplayProof}
+    Análogo al caso anterior.
+    \end{case}
+    \begin{case}{\AxiomC{$s \rightarrow s'$}\UnaryInfC{$s\; ?\; t : u \rightarrow s'\; ?\; t : u $}\DisplayProof}
+    Por hipótesis, $\Val{s} = \Val{s'}$. Analizando luego los casos,
+    \[\Val{s\; ?\; t : u} = \begin{dlrcases}
+        \Val{t} & \textrm{si } \Val{s} = \Val{s'} = 0\\
+        \Val{u} & \textrm{si } \Val{s} = \Val{s'} \in \mathbb{N}^{*}\\
+        \bot_{\mathbb{A}} & \textrm{si } \Val{s} = \Val{s'} = \bot_{\mathbb{N}} \textrm{ y A es el tipo del término}
+    \end{dlrcases}   = \Val{s'\; ?\; t : u}\]
+    \end{case}
+    \begin{case}{\AxiomC{$t \rightarrow t'$}\UnaryInfC{$s\; ?\; t : u \rightarrow s\; ?\; t' : u $}\DisplayProof}
+    Por hipótesis, $\Val{t} = \Val{t'}$. Analizando luego los casos,
+    \[\Val{s\; ?\; t : u} = \begin{dlrcases}
+        \Val{t} = \Val{t'} & \textrm{si } \Val{s} = 0\\
+        \Val{u} & \textrm{si } \Val{s} \in \mathbb{N}^{*}\\
+        \bot_{\mathbb{A}} & \textrm{si } \Val{s} = \bot_{\mathbb{N}} \textrm{ y A es el tipo del término}
+    \end{dlrcases}   = \Val{s\; ?\; t' : u}\]
+    \end{case}
+    \begin{case}{\AxiomC{$u \rightarrow u'$}\UnaryInfC{$s\; ?\; t : u \rightarrow s\; ?\; t : u' $}\DisplayProof}
+    Análogo al caso anterior.
+    \end{case}
+    \begin{case}{\AxiomC{$t \rightarrow u$}\UnaryInfC{$\Me{x}{A}{t} \rightarrow \Me{x}{A}{u}$}\DisplayProof}
+    Por hipótesis, $\Val[\rho]{t} = \Val[\rho]{u}$. Por definición,
+    \[\Val{\Me{x}{A}{t}} = \mathrm{FIX}(\Le{a}{\Val[]{A}}{\Val[\theta,x=a]{t}})\]
+    En particular con $\rho = \theta,x=a$ resulta
+    \[\mathrm{FIX}(\Le{a}{\Val[]{A}}{\Val[\theta,x=a]{t}}) = \mathrm{FIX}(\Le{a}{\Val[]{A}}{\Val[\theta,x=a]{u}})\]
+    que es la semántica denotacional de $\Val{\Me{x}{A}{t}}$.
+    \end{case}
+    \begin{case}{\AxiomC{$t \rightarrow t'$}\UnaryInfC{$\textrm{let } x : A = t \textrm{ in } u \rightarrow \textrm{let } x : A = t' \textrm{ in } u$}\DisplayProof}
+    Por hipótesis, $\Val[\rho]{t} = \Val[\rho]{t'}$. Por definición,
+    \[\Val{\textrm{let } x : A = t \textrm{ in } u} = \Val[\theta,x=\Val{t}]{u}\]
+    Luego $\Val[\theta,x=\Val{t}]{u} = \Val[\theta,x=\Val{t'}]{u}$,
+    que es la semántica denotacional de $\textrm{let } x : A = t' \textrm{ in } u$.
+    \end{case}
+    \begin{case}{\AxiomC{$u \rightarrow u'$}\UnaryInfC{$\textrm{let } x : A = t \textrm{ in } u \rightarrow \textrm{let } x : A = t \textrm{ in } u'$}\DisplayProof}
+    Por hipótesis, $\Val[\rho]{u} = \Val[\rho]{u'}$. Por definición,
+    \[\Val{\textrm{let } x : A = t \textrm{ in } u} = \Val[\theta,x=\Val{t}]{u}\]
+    En particular con $\rho = \theta,x=\Val{t}$ se tiene $\Val[\theta,x=\Val{t}]{u} = \Val[\theta,x=\Val{t}]{u'}$,
+    que es la semántica denotacional de $\textrm{let } x : A = t \textrm{ in } u'$.
+    \end{case}
+    \end{proof}
 \end{homeworkProblem}
 
 \end{document}
