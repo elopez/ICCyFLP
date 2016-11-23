@@ -164,7 +164,7 @@
 \newcommand{\Le}[3]{\lambda #1 : #2 \;.\; #3}
 \newcommand{\Me}[3]{\mu #1 : #2 \;.\; #3}
 
-\newcommand{\Val}[2][\theta]{\left\llbracket #2 \right\rrbracket_{#1}}
+\newcommand{\Val}[2][\theta]{{\left\llbracket {#2} \right\rrbracket}_{#1}}
 
 \begin{document}
 
@@ -231,14 +231,20 @@
         LN &=  \Le{n}{\nat}{\Le{m}{\nat}{m\; ?\; 1\; :\; n \times f\; n\; (m-1)}}\\
         LM &=  \Le{m}{\nat}{m\; ?\; 1\; :\; n \times f\; n\; (m-1)}
         \end{aligned}\]
-
-
         \begin{prooftree}
         \AxiomC{$\Gamma,f=\langle Exp, \Gamma\rangle \vdash LN \hookrightarrow \langle n, LM, \left(\Gamma,f=\langle Exp, \Gamma\rangle\right)\rangle$}
         \UnaryInfC{$\vdash Exp \hookrightarrow \langle n, LM, \left(\Gamma,f=\langle Exp, \Gamma\rangle\right)\rangle$}
         \end{prooftree}
 
         \textbf{Semántica denotacional}
+
+        Sea $Exp = \Me{f}{\nat \Rightarrow \nat}{\Le{n}{\nat}{\Le{m}{\nat}{m\; ?\; 1\; :\; n \times f\; n\; (m-1)}}}$
+        \[\begin{aligned}\Val{Exp} &= \textrm{FIX}(\Le{a}{\Val[]{\nat \Rightarrow \nat}}{\Val[\theta,f=a]{\Le{n}{\nat}{\Le{m}{\nat}{m\; ?\; 1\; :\; n \times f\; n\; (m-1)}}}})\\
+        &= \textrm{FIX}(\Le{a}{\mathbb{N} \Rightarrow \mathbb{N}}{\Le{b}{\Val[]{\nat}}{\Val[\theta,f=a,n=b]{\Le{m}{\nat}{m\; ?\; 1\; :\; n \times f\; n\; (m-1)}}}})\\
+        &= \textrm{FIX}(\Le{a}{\mathbb{N} \Rightarrow \mathbb{N}}{\Le{b}{\mathbb{N}}{\Le{c}{\Val[]{\nat}}{\Val[\theta,f=a,n=b,m=c]{m\; ?\; 1\; :\; n \times f\; n\; (m-1)}}}})\\
+        &= \textrm{FIX}(\Le{a}{\mathbb{N} \Rightarrow \mathbb{N}}{\Le{b}{\mathbb{N}}{\Le{c}{\mathbb{N}}{\Val[\theta,f=a,n=b,m=c]{m\; ?\; 1\; :\; n \times f\; n\; (m-1)}}}})\\
+        &= \bot_{\mathbb{N} \Rightarrow \mathbb{N}}
+        \end{aligned}\]
     \end{enumerate}
 \end{homeworkProblem}
 
@@ -303,11 +309,53 @@
 \begin{homeworkProblem}[40]
     Probar el teorema (4.45): Si $\Gamma \vdash t : A$, entonces para
     toda valuación $\theta$ válida en $\Gamma$ se tiene
-    $\Val{t} \in \llbracket A \rrbracket$
+    $\Val{t} \in \Val[]{A}$
 
     \solution
 
-    TODO
+    Se realiza inducción sobre la derivación de $\Gamma \vdash t : A$.
+
+    \begin{proof}
+    \setcounter{case}{0}
+    \begin{case}{\AxiomC{}\UnaryInfC{$\Gamma, x : A \vdash x : A$}\DisplayProof{}}
+        $\Val{x} = x$, de tipo A, por lo tanto $\Val{x} \in \Val[]{A}$.
+    \end{case}
+    \begin{case}{\AxiomC{}\UnaryInfC{$\Gamma \vdash n : \nat$}\DisplayProof{}}
+        $\Val{n} = n \in \mathbb{N}$ y $\Val[]{\nat} = \mathbb{N}$, por lo tanto $\Val{n} \in \Val[]{\nat}$.
+    \end{case}
+    \begin{case}{\AxiomC{$\Gamma, x : A \vdash t : B$}\UnaryInfC{$\Gamma \vdash \lambda x.t : A \Rightarrow B$}\DisplayProof{}}
+        Por hipótesis inductiva se sabe que $\Val{x} \in \Val[]{A}$ y $\Val{t} \in \Val[]{B}$
+        para $\theta$ válido. Luego
+        $\Val{\lambda x.t} = \lambda a . \Val[\theta,x=a]{t}$, una función
+        $\Val[]{A} \rightarrow \Val[]{B}$, es decir que pertenece a $\Val[]{A \Rightarrow B}$.
+    \end{case}
+    \begin{case}{\AxiomC{$\Gamma \vdash t : A \Rightarrow B$}\AxiomC{$\Gamma \vdash u : A$}\BinaryInfC{$\Gamma \vdash \lambda x.t : A \Rightarrow B$}\DisplayProof{}}
+        Por hipótesis inductiva se sabe que $\Val{t} \in \Val[]{A \Rightarrow B}$ y $\Val{u} \in \Val[]{A}$.
+        Además, $\Val{t\; u} = \Val{t} \Val{u}$. Siendo que t es una función de tipo
+        $A \rightarrow B$ y $u$ un argumento de tipo $A$,
+        luego resulta una evaluación de tipo $B$, que estará contenida en $\Val[]{B}$.
+    \end{case}
+    \begin{case}{\AxiomC{$\Gamma \vdash t : \nat$}\AxiomC{$\Gamma \vdash u : \nat$}\BinaryInfC{$\Gamma \vdash t \odot u : \nat$}\DisplayProof{}}
+        Por hipótesis inductiva se sabe que $\Val{t}, \Val{u} \in \mathbb{N}$.
+        Considerando que $\Val{t \odot u} = \Val{t} \odot \Val{u} = t \odot u$,
+        un natural, resulta claro que $\Val{t \odot u} \in \Val[]{\nat}$.
+    \end{case}
+    \begin{case}{\AxiomC{$\Gamma \vdash t : \nat$}\AxiomC{$\Gamma \vdash u : A$}\AxiomC{$\Gamma \vdash v : A$}\TrinaryInfC{$\Gamma \vdash t\; ?\; u : v$}\DisplayProof{}}
+        Por hipótesis inductiva se sabe que $\Val{t} \in \mathbb{N}$ y que $\Val{u}, \Val{v} \in \Val[]{A}$.
+        $\Val{t\; ?\; u : v}$, dependiendo del valor de $t$ resulta $\Val{u}$, $\Val{v}$ o $\bot_{A}$,
+        todos contenidos en $\Val[]{A}$.
+    \end{case}
+    \begin{case}{\AxiomC{$\Gamma, x : A \vdash t : A$}\UnaryInfC{$\Gamma \vdash \mu x . t : A$}\DisplayProof{}}
+        Por hipótesis inductiva se sabe que $\Val{t} \in \Val[]{A}$.
+        Visto que \[\Val{\mu x . t} = \textrm{FIX}(\lambda a . \Val[\theta,x=a]{t}) = \left(\lambda a . \Val[\theta,x=a]{t}\right) \textrm{FIX}(\lambda a . \Val[\theta,x=a]{t})\]
+        en otras palabras, una valuación particular de $t$. Como $\Val[\theta]{t} \in \Val[]{A}$, luego $\Val{\mu x . t} \in \Val[]{A}$.
+    \end{case}
+    \begin{case}{\AxiomC{$\Gamma, x : A \vdash t : B$}\AxiomC{$\Gamma \vdash u : A$}\BinaryInfC{$\Gamma \vdash \textrm{let } x = u \textrm{ in } t : B$}\DisplayProof{}}
+        Por hipótesis inductiva se sabe que $\Val[\theta,x:A]{t} \in \Val[]{B}$ y a su vez $\Val{x}, \Val{u} \in \Val[]{A}$.
+        Luego como $\Val{\textrm{let } x = u \textrm{ in } t} = \Val[\theta,x=\Val{u}]{t}$, con $\Val{u}$
+        de tipo A, podemos concluir que $\Val{\textrm{let } x = u \textrm{ in } t} \in \Val[]{B}$.
+    \end{case}
+    \end{proof}
 \end{homeworkProblem}
 
 \begin{homeworkProblem}[41]
@@ -323,6 +371,7 @@
     se procede por inducción estructural sobre u.
 
     \begin{proof}
+    \setcounter{case}{0}
     \begin{case}{$u = n$.}
     Dado que $n[t/x] = n$, se concluye que $\Val{n[t/x]} = \Val[\theta,x=\Val{t}]{n}$.
     \end{case}
@@ -383,7 +432,16 @@
     $y=a$, resulta en ambos casos $\textrm{FIX}(\Le{a}{\Val[]{C}}{\Val[\theta,x=\Val{t},y=a]{r}}) = \Val[\theta,x=\Val{t}]{\Me{y}{C}{r}}$.
     \end{case}
     \begin{case}{$\textrm{let } y : C = r \textrm{ in } s$.}
-        TODO
+    Sin pérdida de generalidad, asumamos que $y \notin FV(t)$
+    (caso contrario, se renombrará $y$ en $t$). Por hipótesis inductiva
+    sabemos que $\Val{r[t/x]} = \Val[\theta,x=\Val{t}]{r}$ y que
+    $\Val{s[t/x]} = \Val[\theta,x=\Val{t}]{s}$. Luego
+    \[\Val{\left(\textrm{let } y : C = r \textrm{ in } s\right)[t/x]} = \begin{cases}
+        \Val{\textrm{let } y : C = r[t/x] \textrm{ in } s} = \Val[\theta,y=\Val{r[t/x]}]{s} & \textrm{si } x = y\\
+        \Val{\textrm{let } y : C = r[t/x] \textrm{ in } s[t/x]} = \Val[\theta,y=\Val{r[t/x]}]{s[t/x]} & \textrm{si } x \neq y
+    \end{cases}\]
+    Por hipótesis vemos que $\Val[\theta,y=\Val{r[t/x]}]{s[t/x]} = \Val[\theta,x=\Val{t},y=\rho]{s}$ con $\rho=\Val[\theta,x=\Val{t}]{r}$.
+    Por idénticas razones al caso anterior, ambos casos luego equivalen a $\Val[\theta,x=\Val{t}]{\textrm{let } y : C = r \textrm{ in } s}$
     \end{case}
     \end{proof}
     \setcounter{case}{0}
